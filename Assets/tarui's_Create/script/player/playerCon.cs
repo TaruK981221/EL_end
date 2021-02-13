@@ -9,6 +9,9 @@ public class playerCon : MonoBehaviour
     [SerializeField]
     bool isFlg = false;
 
+    [SerializeField]
+    float JumpPower = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,11 @@ public class playerCon : MonoBehaviour
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
             }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                rb.velocity += Vector3.up * JumpPower;
+            }
         }
         else
         {
@@ -47,11 +55,16 @@ public class playerCon : MonoBehaviour
             {
                 rb.velocity = new Vector3(0, rb.velocity.y, 0);
             }
-        }
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.velocity += Vector3.up * 10.0f;
+            if (Input.GetKeyDown(KeyCode.W))
+            {
+                rb.velocity += Vector3.up * JumpPower;
+            }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 }
