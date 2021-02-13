@@ -19,13 +19,20 @@ public class GameScene : MonoBehaviour
 
 	private bool spwan;
 
+	public int winner = 0;
+
 	private playerCon player1Con;
 	private playerCon player2Con;
 
 	private List<GameObject> rocks;
+
+	private DataSaver dataSaver;
+	private TimerController timerc;
+	private CountController counterc;
     // Start is called before the first frame update
     void Start()
     {
+		dataSaver = GetComponent<DataSaver>();
 		player1Con = player1.GetComponent<playerCon>();
 		player2Con = player1.GetComponent<playerCon>();
 		Material material = loadObject.GetComponent<MeshRenderer>().material;
@@ -33,18 +40,21 @@ public class GameScene : MonoBehaviour
 
 		rocks = new List<GameObject>();
 		spwan = false;
+
+		timerc = timer.GetComponent<TimerController>();
+		counterc = counter.GetComponent<CountController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-		if(!timer.GetComponent<TimerController>().isStart)
+		if(!timerc.isStart)
 		{
 			ReadyState();
 		}
 		else
 		{
-			counter.GetComponent<CountController>().isStart = true;
+			counterc.isStart = true;
 			ActiveState();
 		}
     }
@@ -58,7 +68,7 @@ public class GameScene : MonoBehaviour
 
 	private void ActiveState()
 	{
-		if (counter.GetComponent<CountController>().milliseconds % spawnRate == 0 && !spwan)
+		if (counterc.milliseconds % spawnRate == 0 && !spwan)
 		{
 			spwan = true;
 			if (spwan)
@@ -73,17 +83,26 @@ public class GameScene : MonoBehaviour
 
 		if(player1Con.HP == 0)
 		{
-
+			winner = 0;
+			DataSaver.winner = winner;
+			Debug.Log(winner);
+			SceneManager.LoadScene("ResultScene");
 		}
 
 		if(player2Con.HP == 0)
 		{
-
+			winner = 1;
+			DataSaver.winner = winner;
+			Debug.Log(winner);
+			SceneManager.LoadScene("ResultScene");
 		}
 
-		if(counter.GetComponent<CountController>().seconds == 0)
+		if(counterc.seconds == 0)
 		{
-
+			winner = 2;
+			DataSaver.winner = winner;
+			Debug.Log(winner);
+			SceneManager.LoadScene("ResultScene");
 		}
 	}
 }
