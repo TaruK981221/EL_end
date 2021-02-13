@@ -61,6 +61,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFlg: 0
+  JumpPower: 5
+  DamageTimeLimit: 3
+  HP: 5
+  material: {fileID: 2100000, guid: 1d80edf68cd25b641b2fc927961249d0, type: 2}
 --- !u!1001 &3828034195498645689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player_run_blue
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 1f315a9f4e4450247a98601271e14b11,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f315a9f4e4450247a98601271e14b11, type: 3}

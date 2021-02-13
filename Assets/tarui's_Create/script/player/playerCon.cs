@@ -16,9 +16,15 @@ public class playerCon : MonoBehaviour
     float BoundTimeLimit = 0.5f;
     float BoundTime = 0.0f;
 
-    //bool is
+    bool isDamage = false;
+    float DamageTime = 0.0f;
+    [SerializeField]
+    float DamageTimeLimit = 3.0f;
 
-    public int HP = 10;
+    public int HP = 5;
+
+    [SerializeField]
+    Material material;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +64,7 @@ public class playerCon : MonoBehaviour
                     rb.velocity = new Vector3(0, rb.velocity.y, 0);
                 }
 
-                if (Input.GetKeyDown(KeyCode.UpArrow))
+                if (Input.GetKeyDown(KeyCode.UpArrow) && rb.velocity.y == 0.0f)
                 {
                     rb.velocity += Vector3.up * JumpPower;
                 }
@@ -78,10 +84,37 @@ public class playerCon : MonoBehaviour
                     rb.velocity = new Vector3(0, rb.velocity.y, 0);
                 }
 
-                if (Input.GetKeyDown(KeyCode.W))
+                if (Input.GetKeyDown(KeyCode.W) && rb.velocity.y == 0.0f)
                 {
                     rb.velocity += Vector3.up * JumpPower;
                 }
+            }
+        }
+
+        if(isDamage)
+        {
+            Color color = material.color;
+            if (DamageTime < DamageTimeLimit)
+            {
+                DamageTime += Time.deltaTime;
+
+                if (DamageTime % 0.2f < 0.1f)
+                {
+                    color.a = 0.2f;
+                    material.color = color;
+                }
+                else
+                {
+                    color.a = 1.0f;
+                    material.color = color;
+                }
+            }
+            else
+            {
+                color.a = 1.0f;
+                material.color = color;
+                DamageTime = 0.0f;
+                isDamage = false;
             }
         }
     }
@@ -107,11 +140,11 @@ public class playerCon : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Block")
+        if(other.tag == "Block" && !isDamage)
         {
             HP -= 1;
 
-
+            isDamage = true;
         }
     }
 }
