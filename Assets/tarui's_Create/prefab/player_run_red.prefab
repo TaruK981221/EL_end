@@ -60,7 +60,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df84435dda9743f4dbc3858801bb1b21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFlg: 0
+  isFlg: 1
+  JumpPower: 5
+  DamageTimeLimit: 3
+  HP: 5
+  material: {fileID: 2100000, guid: 7ef1a8bb456515a449d3bc3b497dfd02, type: 2}
 --- !u!1001 &8580323915034260176
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -132,6 +136,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player_run_red
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 1f315a9f4e4450247a98601271e14b11,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f315a9f4e4450247a98601271e14b11, type: 3}
