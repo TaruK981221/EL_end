@@ -57,7 +57,7 @@ public class GameScene : MonoBehaviour
 			if (spwan)
 			{
 				GameObject rock = Instantiate(rockPrefab,
-					new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth / 20.0f * (float)raneCount), 0.0f, 10.0f),
+					new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth / 20.0f * (float)raneCount), 0.0f, 18.0f),
 					Quaternion.AngleAxis(90.0f, Vector3.up));
 				rock.GetComponent<RockScript>().scrollSpeed = rockScroolSpeed;
 				spwan = false;
