@@ -8,6 +8,7 @@ public class CountController : MonoBehaviour
 	public Text timerText;
 
 	public int seconds;
+	public int milliseconds;
 	public int maxTime;
 	public bool isStart;
 
@@ -26,6 +27,7 @@ public class CountController : MonoBehaviour
 		{
 			totalTime -= Time.deltaTime;
 			seconds = (int)totalTime;
+			milliseconds = (int)(Time.frameCount);
 			timerText.text = seconds.ToString();
 		}
 	}

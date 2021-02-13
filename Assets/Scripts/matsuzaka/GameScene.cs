@@ -13,6 +13,7 @@ public class GameScene : MonoBehaviour
 	public int raneCount;
 	public float loadScroolSpeed;
 	public float rockScroolSpeed;
+	public int spawnRate;
 
 	private bool spwan;
 
@@ -50,9 +51,17 @@ public class GameScene : MonoBehaviour
 
 	private void ActiveState()
 	{
-		if (counter.GetComponent<CountController>().seconds % 2 == 0 && !spwan)
+		if (counter.GetComponent<CountController>().milliseconds % spawnRate == 0 && !spwan)
 		{
-			StartCoroutine("SpawnRock");
+			spwan = true;
+			if (spwan)
+			{
+				GameObject rock = Instantiate(rockPrefab,
+					new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth / 20.0f * (float)raneCount), 0.0f, 10.0f),
+					Quaternion.AngleAxis(90.0f, Vector3.up));
+				rock.GetComponent<RockScript>().scrollSpeed = rockScroolSpeed;
+				spwan = false;
+			}
 		}
 	}
 	IEnumerator SpawnRock()
@@ -62,7 +71,7 @@ public class GameScene : MonoBehaviour
 		if (spwan)
 		{
 			GameObject rock = Instantiate(rockPrefab,
-				new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth) / 10.0f * (float)raneCount, 0.0f, 10.0f),
+				new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth / 20.0f * (float)raneCount), 0.0f, 10.0f),
 				Quaternion.AngleAxis(90.0f, Vector3.up));
 			rock.GetComponent<RockScript>().scrollSpeed = rockScroolSpeed;
 			spwan = false;
