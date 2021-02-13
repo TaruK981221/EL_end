@@ -38,7 +38,7 @@ public class LifeManager : MonoBehaviour
 		{
 			player1Life.Add(Instantiate(player1Prefab, new Vector3(40.0f * (float)(i + 1), (float)Screen.height - 20.0f, 0.0f),
 				Quaternion.identity, this.gameObject.transform));
-			player2Life.Add(Instantiate(player2Prefab, new Vector3((float)Screen.width - 40.0f * (float)(lifeCount - i), (float)Screen.height - 20.0f, 0.0f),
+			player2Life.Add(Instantiate(player2Prefab, new Vector3((float)Screen.width - 40.0f * (float)(i + 1), (float)Screen.height - 20.0f, 0.0f),
 				Quaternion.identity, this.gameObject.transform));
 		}
 	}
