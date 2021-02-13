@@ -119,24 +119,24 @@ public class playerCon : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if(collision.gameObject.tag== "Player")
-    //    {
-    //        rb.velocity = Vector3.zero;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            rb.velocity = Vector3.zero;
 
-    //        if (collision.transform.position.x < transform.position.x)
-    //        {
-    //            rb.velocity += new Vector3(1, 1.5f, 0) * 1.0f;
-    //        }
-    //        else
-    //        {
-    //            rb.velocity += new Vector3(-1, 1.5f, 0) * 1.0f;
-    //        }
+            if (collision.transform.position.x < transform.position.x)
+            {
+                rb.velocity += new Vector3(1, 1.5f, 0) * 1.0f;
+            }
+            else
+            {
+                rb.velocity += new Vector3(-1, 1.5f, 0) * 1.0f;
+            }
 
-    //        isBound = true;
-    //    }
-    //}
+            isBound = true;
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
