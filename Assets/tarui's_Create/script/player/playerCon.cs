@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using KanKikuchi.AudioManager;
 
 public class playerCon : MonoBehaviour
 {
@@ -26,10 +27,16 @@ public class playerCon : MonoBehaviour
     [SerializeField]
     Material material;
 
+    bool isLR = false;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
+        Color color = material.color;
+        color.a = 1.0f;
+        material.color = color;
     }
 
     // Update is called once per frame
@@ -53,40 +60,60 @@ public class playerCon : MonoBehaviour
             {
                 if (Input.GetKey(KeyCode.LeftArrow))
                 {
-                    rb.velocity = new Vector3(Vector3.left.x * 1.0f, rb.velocity.y, 0);
+                    isLR = true;
                 }
                 else if (Input.GetKey(KeyCode.RightArrow))
                 {
-                    rb.velocity = new Vector3(Vector3.right.x * 1.0f, rb.velocity.y, 0);
+                    isLR = false;
+                }
+                //else
+                //{
+                //    rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                //}
+
+                if (isLR)
+                {
+                    rb.velocity = new Vector3(Vector3.left.x * 1.0f, rb.velocity.y, 0);
                 }
                 else
                 {
-                    rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                    rb.velocity = new Vector3(Vector3.right.x * 1.0f, rb.velocity.y, 0);
                 }
 
                 if (Input.GetKeyDown(KeyCode.UpArrow) && rb.velocity.y == 0.0f)
                 {
                     rb.velocity += Vector3.up * JumpPower;
+                    SEManager.Instance.Play(SEPath.SE_JUMP1, 1, 0, Random.Range(0.5f, 1.5f));
                 }
             }
             else
             {
                 if (Input.GetKey(KeyCode.A))
                 {
-                    rb.velocity = new Vector3(Vector3.left.x * 1.0f, rb.velocity.y, 0);
+                    isLR = true;
                 }
                 else if (Input.GetKey(KeyCode.D))
                 {
-                    rb.velocity = new Vector3(Vector3.right.x * 1.0f, rb.velocity.y, 0);
+                    isLR = false;
+                }
+                //else
+                //{
+                //    rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                //}
+
+                if (isLR)
+                {
+                    rb.velocity = new Vector3(Vector3.left.x * 1.0f, rb.velocity.y, 0);
                 }
                 else
                 {
-                    rb.velocity = new Vector3(0, rb.velocity.y, 0);
+                    rb.velocity = new Vector3(Vector3.right.x * 1.0f, rb.velocity.y, 0);
                 }
 
                 if (Input.GetKeyDown(KeyCode.W) && rb.velocity.y == 0.0f)
                 {
                     rb.velocity += Vector3.up * JumpPower;
+                    SEManager.Instance.Play(SEPath.SE_JUMP1, 1, 0, Random.Range(0.5f, 1.5f));
                 }
             }
         }
@@ -142,6 +169,8 @@ public class playerCon : MonoBehaviour
     {
         if(other.tag == "Block" && !isDamage)
         {
+            SEManager.Instance.Play(SEPath.SE_PDAMAGE, 1, 0, Random.Range(0.5f, 1.5f));
+
             HP -= 1;
 
             isDamage = true;
