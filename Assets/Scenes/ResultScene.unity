@@ -315,6 +315,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf6eef23163b6649bb62efd78ae29a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player1Prefab: {fileID: 8546101388329558301, guid: 0271ed821a222214680aa1b68780f4dc,
+    type: 3}
+  player2Prefab: {fileID: 3435842067180871972, guid: 114de1b02a3bef643b38d435106e52c8,
+    type: 3}
 --- !u!4 &886582863
 Transform:
   m_ObjectHideFlags: 0
@@ -323,7 +327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886582861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5127277, y: -1.2247295, z: 5.3698673}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -432,6 +436,7 @@ GameObject:
   - component: {fileID: 1199178980}
   - component: {fileID: 1199178982}
   - component: {fileID: 1199178981}
+  - component: {fileID: 1199178983}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -478,17 +483,17 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
-    m_LineSpacing: 1
+    m_LineSpacing: 2.6
   m_Text: Player1 WIn
 --- !u!222 &1199178982
 CanvasRenderer:
@@ -498,6 +503,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1199178979}
   m_CullTransparentMesh: 0
+--- !u!114 &1199178983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199178979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5b0fa6b1a1e11a42942a76ccfc1d5b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1607228108
 GameObject:
   m_ObjectHideFlags: 0
@@ -575,7 +592,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607228108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalPosition: {x: 0.205, y: 0.151, z: -0.505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
