@@ -9,6 +9,8 @@ public class GameScene : MonoBehaviour
 	public GameObject loadObject;
 	public GameObject timer;
 	public GameObject counter;
+	public GameObject player1;
+	public GameObject player2;
 	public float loadWidth;
 	public int raneCount;
 	public float loadScroolSpeed;
@@ -17,10 +19,15 @@ public class GameScene : MonoBehaviour
 
 	private bool spwan;
 
+	private playerCon player1Con;
+	private playerCon player2Con;
+
 	private List<GameObject> rocks;
     // Start is called before the first frame update
     void Start()
     {
+		player1Con = player1.GetComponent<playerCon>();
+		player2Con = player1.GetComponent<playerCon>();
 		Material material = loadObject.GetComponent<MeshRenderer>().material;
 		material.SetFloat("_ScrollSpeed", loadScroolSpeed);
 
@@ -63,19 +70,25 @@ public class GameScene : MonoBehaviour
 				spwan = false;
 			}
 		}
-	}
-	IEnumerator SpawnRock()
-	{
-		spwan = true;
-		yield return new WaitForSeconds(0.1f);
-		if (spwan)
+
+		if(player1Con.HP == 0)
 		{
-			GameObject rock = Instantiate(rockPrefab,
-				new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth / 20.0f * (float)raneCount), 0.0f, 10.0f),
-				Quaternion.AngleAxis(90.0f, Vector3.up));
-			rock.GetComponent<RockScript>().scrollSpeed = rockScroolSpeed;
-			spwan = false;
+			SceneManager.LoadScene("ResultScene2");
 		}
 
+		if(player2Con.HP == 0)
+		{
+			SceneManager.LoadScene("ResultScene1");
+		}
+
+		if(counter.GetComponent<CountController>().seconds == 0)
+		{
+			if (player1Con.HP > player2Con.HP)
+				SceneManager.LoadScene("ResultScene1");
+			else if (player1Con.HP < player2Con.HP)
+				SceneManager.LoadScene("ResultScene2");
+			else
+				SceneManager.LoadScene("ResultScene3");
+		}
 	}
 }
