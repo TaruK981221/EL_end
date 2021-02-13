@@ -17,7 +17,7 @@ public class RockScript : MonoBehaviour
     {
 		transform.Translate(new Vector3(scrollSpeed, 0.0f, 0.0f));
 
-		if (transform.position.x < zOver)
+		if (transform.position.z < zOver)
 			Destroy(this.gameObject);
 	}
 }

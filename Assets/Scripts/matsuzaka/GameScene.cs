@@ -14,6 +14,8 @@ public class GameScene : MonoBehaviour
 	public float loadScroolSpeed;
 	public float rockScroolSpeed;
 
+	private bool spwan;
+
 	private List<GameObject> rocks;
     // Start is called before the first frame update
     void Start()
@@ -22,17 +24,19 @@ public class GameScene : MonoBehaviour
 		material.SetFloat("_ScrollSpeed", loadScroolSpeed);
 
 		rocks = new List<GameObject>();
+		spwan = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-		if(timer.GetComponent<TimerController>().isStart)
+		if(!timer.GetComponent<TimerController>().isStart)
 		{
 			ReadyState();
 		}
 		else
 		{
+			counter.GetComponent<CountController>().isStart = true;
 			ActiveState();
 		}
     }
@@ -46,12 +50,23 @@ public class GameScene : MonoBehaviour
 
 	private void ActiveState()
 	{
-		if (counter.GetComponent<CountController>().seconds % 4 == 0)
+		if (counter.GetComponent<CountController>().seconds % 2 == 0 && !spwan)
+		{
+			StartCoroutine("SpawnRock");
+		}
+	}
+	IEnumerator SpawnRock()
+	{
+		spwan = true;
+		yield return new WaitForSeconds(0.1f);
+		if (spwan)
 		{
 			GameObject rock = Instantiate(rockPrefab,
-				new Vector3(Mathf.Round(Random.Range(-0.5f, 0.5f) * loadWidth) * (float)raneCount, 0.0f, 10.0f),
+				new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth) / 10.0f * (float)raneCount, 0.0f, 10.0f),
 				Quaternion.AngleAxis(90.0f, Vector3.up));
 			rock.GetComponent<RockScript>().scrollSpeed = rockScroolSpeed;
+			spwan = false;
 		}
+
 	}
 }
