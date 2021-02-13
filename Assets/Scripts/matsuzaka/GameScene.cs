@@ -73,22 +73,17 @@ public class GameScene : MonoBehaviour
 
 		if(player1Con.HP == 0)
 		{
-			SceneManager.LoadScene("ResultScene2");
+
 		}
 
 		if(player2Con.HP == 0)
 		{
-			SceneManager.LoadScene("ResultScene1");
+
 		}
 
 		if(counter.GetComponent<CountController>().seconds == 0)
 		{
-			if (player1Con.HP > player2Con.HP)
-				SceneManager.LoadScene("ResultScene1");
-			else if (player1Con.HP < player2Con.HP)
-				SceneManager.LoadScene("ResultScene2");
-			else
-				SceneManager.LoadScene("ResultScene3");
+
 		}
 	}
 }
