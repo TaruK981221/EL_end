@@ -7,10 +7,15 @@ public class GameScene : MonoBehaviour
 {
 	public GameObject rockPrefab;
 	public GameObject loadObject;
+	public GameObject timer;
+	public GameObject counter;
 	public float loadWidth;
 	public int raneCount;
 	public float loadScroolSpeed;
 	public float rockScroolSpeed;
+	public int spawnRate;
+
+	private bool spwan;
 
 	private List<GameObject> rocks;
     // Start is called before the first frame update
@@ -20,25 +25,57 @@ public class GameScene : MonoBehaviour
 		material.SetFloat("_ScrollSpeed", loadScroolSpeed);
 
 		rocks = new List<GameObject>();
+		spwan = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-		if (Input.GetKeyDown(KeyCode.Z))
+		if(!timer.GetComponent<TimerController>().isStart)
 		{
-			GameObject rock = Instantiate(
-				rockPrefab,
-				new Vector3(Mathf.Round(Random.Range(-0.5f, 0.5f) * loadWidth * (float)raneCount), 0.5f, 8.0f),
-				Quaternion.identity);
-			rock.GetComponent<RockScript>().scrollSpeed = rockScroolSpeed;
+			ReadyState();
 		}
-
-		if (Input.GetKeyDown(KeyCode.Space))
+		else
 		{
-			SceneManager.LoadScene("ResultScene");
+			counter.GetComponent<CountController>().isStart = true;
+			ActiveState();
 		}
     }
 
 	
+
+	private void ReadyState()
+	{
+
+	}
+
+	private void ActiveState()
+	{
+		if (counter.GetComponent<CountController>().milliseconds % spawnRate == 0 && !spwan)
+		{
+			spwan = true;
+			if (spwan)
+			{
+				GameObject rock = Instantiate(rockPrefab,
+					new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth / 20.0f * (float)raneCount), 0.0f, 10.0f),
+					Quaternion.AngleAxis(90.0f, Vector3.up));
+				rock.GetComponent<RockScript>().scrollSpeed = rockScroolSpeed;
+				spwan = false;
+			}
+		}
+	}
+	IEnumerator SpawnRock()
+	{
+		spwan = true;
+		yield return new WaitForSeconds(0.1f);
+		if (spwan)
+		{
+			GameObject rock = Instantiate(rockPrefab,
+				new Vector3(Mathf.Round(Random.Range(-10.0f, 10.0f) * loadWidth / 20.0f * (float)raneCount), 0.0f, 10.0f),
+				Quaternion.AngleAxis(90.0f, Vector3.up));
+			rock.GetComponent<RockScript>().scrollSpeed = rockScroolSpeed;
+			spwan = false;
+		}
+
+	}
 }
